@@ -9,13 +9,13 @@ ENV DEBIAN_FRONTEND="noninteractive apt-get autoremove" \
     LC_CTYPE="en_AU.UTF-8" \
     TZ="Australia/Adelaide"
 
-RUN apt-get update && apt-get install -yq \
+RUN apt-get update && apt-get install --no-install-recommends -yq \
     locales \
     && locale-gen en_AU.UTF-8 \
     && dpkg-reconfigure locales \
     && apt-get clean -yq && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN apt-get update && apt-get install -yq \
+RUN apt-get update && apt-get install --no-install-recommends -yq \
     curl \
     python \
     git \
