@@ -13,13 +13,13 @@ RUN apt-get update && apt-get install -yq \
     locales \
     && locale-gen en_AU.UTF-8 \
     && dpkg-reconfigure locales \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean -yq && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN apt-get update && apt-get install -yq \
     curl \
     python \
     git \
     sudo \
-    docker \
+    docker.io \
     && curl https://sdk.cloud.google.com | bash \
-    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean -yq && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
