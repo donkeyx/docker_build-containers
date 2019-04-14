@@ -21,9 +21,14 @@ RUN apt-get update && apt-get install --no-install-recommends -yq \
     git \
     sudo \
     docker.io \
-    && curl https://sdk.cloud.google.com | bash \
     && apt-get clean -yq && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN echo "source /root/google-cloud-sdk/path.bash.inc" >> /root/.bashrc \
-    && echo "source /root/google-cloud-sdk/completion.bash.inc" >> /root/.bashrc
+
+RUN curl -k -O "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-241.0.0-linux-x86_64.tar.gz" \
+    && tar -xvf google-cloud-sdk-241.0.0-linux-x86_64.tar.gz \
+    && ./google-cloud-sdk/install.sh \
+    && rm google-cloud-sdk-241.0.0-linux-x86_64.tar.gz \
+    && echo "source /google-cloud-sdk/completion.bash.inc" >> /root/.bashrc \
+    && echo "source /google-cloud-sdk/path.bash.inc" >> /root/.bashrc \
+    && apt-get clean -yq && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
