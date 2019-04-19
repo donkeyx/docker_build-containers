@@ -32,3 +32,4 @@ RUN curl -k -O "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/googl
     && echo "source /google-cloud-sdk/path.bash.inc" >> /root/.bashrc \
     && apt-get clean -yq && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+ENTRYPOINT ["/bin/bash"]
