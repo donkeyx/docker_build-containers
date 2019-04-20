@@ -21,7 +21,7 @@ RUN apt-get -qq update && apt-get install --no-install-recommends -yq \
 
 
 RUN apt-get -qq update && apt-get install --no-install-recommends -yq \
-    gnupg systemd jq curl git sudo python \
+    gnupg jq curl git sudo python \
     && apt-get install --no-install-recommends -yq \
     # python-distutils \
     libpython2.7-stdlib \
@@ -45,5 +45,5 @@ RUN echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stabl
     docker-ce \
     && apt-get clean -yq && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-
-ENTRYPOINT ["/bin/bash"]
+COPY ./startup.sh .
+CMD ["/bin/bash", "./startup.sh"]
