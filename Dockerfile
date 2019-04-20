@@ -21,7 +21,7 @@ RUN apt-get -qq update && apt-get install --no-install-recommends -yq \
 
 
 RUN apt-get -qq update && apt-get install --no-install-recommends -yq \
-    gnupg jq curl git sudo python \
+    gnupg systemd jq curl git sudo python \
     && apt-get install --no-install-recommends -yq \
     # python-distutils \
     libpython2.7-stdlib \
@@ -38,12 +38,12 @@ RUN echo "deb http://packages.cloud.google.com/apt cloud-sdk-`eval $OS_VERSION` 
     google-cloud-sdk \
     && apt-get clean -yq && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+ENV DOCKER_OPTS="-s overlay"
 RUN echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable" | sudo tee -a /etc/apt/sources.list.d/docker-ce.list \
     && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - \
     && apt-get -qq update && apt-get install --no-install-recommends -yq \
     docker-ce \
     && apt-get clean -yq && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
 
 
 ENTRYPOINT ["/bin/bash"]
